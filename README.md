@@ -58,6 +58,18 @@ Options:
 * `-p` Pivot table
 
 ---
+## add API functionality,
+including the routes/api.php file and authentication scaffolding, run the following Artisan command in your Laravel 12 project's terminal: 
+```bash
+php artisan install:api
+```
+What This Command Does:-
+
+Creates routes/api.php: In Laravel 11 and 12, the API routes file is no longer included by default to keep projects minimal. This command restores the file.
+
+Installs Laravel Sanctum: It automatically installs the Laravel Sanctum package for token-based API authentication.
+
+Registers Routes and Middleware: It adds the necessary configuration in bootstrap/app.php and applies the api middleware group (including rate limiting) to all routes defined in routes/api.php, and configures the HasApiTokens trait on your User model. 
 
 ## Database & Migration Commands
 
