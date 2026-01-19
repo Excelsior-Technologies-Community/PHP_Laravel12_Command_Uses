@@ -1,0 +1,449 @@
+Laravel Commands: Complete Guide
+Laravel provides a powerful command-line interface called Artisan that helps with various development tasks. Here's a comprehensive guide to the most essential commands:
+
+Installation & Setup Commands
+
+1. Create a New Laravel Project
+bash
+# Using Composer
+composer create-project laravel/laravel project-name
+
+# Using Laravel Installer
+laravel new project-name
+
+# Specify Laravel version
+composer create-project laravel/laravel project-name "12.*"
+
+
+2. Serve the Application
+bash
+# Start development server
+php artisan serve
+
+# Serve on specific port
+php artisan serve --port=8080
+
+# Serve on specific host and port
+php artisan serve --host=0.0.0.0 --port=8000
+
+
+Application Structure Commands
+3. Generate Controllers
+bash
+# Basic controller
+php artisan make:controller UserController
+
+# Resource controller (with CRUD methods)
+php artisan make:controller UserController --resource
+
+# API controller (resource without create/edit methods)
+php artisan make:controller UserController --api
+
+# Invokable controller (single action)
+php artisan make:controller WelcomeController --invokable
+
+# Controller with model
+php artisan make:controller UserController --model=User
+4. Generate Models
+bash
+# Basic model
+php artisan make:model User
+
+# Model with migration, factory, seeder, and controller
+php artisan make:model User -mfc
+
+# Options breakdown:
+# -m, --migration      Create a new migration file
+# -c, --controller     Create a new controller
+# -r, --resource       Indicates controller should be resource
+# -f, --factory        Create a new factory
+# --seed               Create a new seeder
+# -p, --pivot          Indicates model is for a pivot table
+5. Generate Migrations
+bash
+# Create migration for a new table
+php artisan make:migration create_users_table
+
+# Create migration for adding columns
+php artisan make:migration add_status_to_users_table --table=users
+
+# Create migration for dropping columns
+php artisan make:migration remove_status_from_users_table --table=users
+6. Run Migrations
+bash
+# Run all pending migrations
+php artisan migrate
+
+# Run migrations with output
+php artisan migrate --verbose
+
+# Rollback last batch
+php artisan migrate:rollback
+
+# Rollback all migrations
+php artisan migrate:reset
+
+# Rollback and migrate again
+php artisan migrate:refresh
+
+# Rollback, migrate, and seed
+php artisan migrate:refresh --seed
+
+# Show migration status
+php artisan migrate:status
+
+# Create migration and run it immediately
+php artisan migrate:fresh
+
+
+Database & Seeding Commands
+7. Seeders & Factories
+bash
+# Create a seeder
+php artisan make:seeder UserSeeder
+
+# Run specific seeder
+php artisan db:seed --class=UserSeeder
+
+# Run all seeders
+php artisan db:seed
+
+# Create a factory
+php artisan make:factory UserFactory
+
+# Run seeders in production (no confirmation)
+php artisan db:seed --force
+8. Database Commands
+bash
+# Create database tables from migrations
+php artisan migrate
+
+# Show all registered routes
+php artisan route:list
+
+# Show database tables
+php artisan db:show
+
+# Create a database
+php artisan db:create database_name
+
+
+Routing & Middleware Commands
+9. Middleware
+bash
+# Create new middleware
+php artisan make:middleware CheckAge
+
+# Create middleware with --force to overwrite
+php artisan make:middleware AdminOnly --force
+
+
+Authentication Commands
+10. Authentication Scaffolding
+bash
+# Install Laravel Breeze (simple starter kit)
+composer require laravel/breeze
+php artisan breeze:install
+
+# Install Laravel Jetstream (advanced starter kit)
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+
+# Install Laravel UI (Legacy)
+composer require laravel/ui
+php artisan ui bootstrap --auth
+
+
+Package Development
+11. Package Commands
+bash
+# Create a new package
+php artisan package:discover
+
+# Cache package discovery
+php artisan package:discover --ansi
+
+
+Debugging & Testing Commands
+12. Tinker (Interactive Shell)
+bash
+# Start interactive shell
+php artisan tinker
+
+# Execute specific code
+php artisan tinker --execute="echo 'Hello World';"
+
+# Examples of tinker usage:
+# >>> $user = new App\Models\User;
+# >>> $user->name = "John";
+# >>> $user->email = "john@example.com";
+# >>> $user->save();
+13. Testing Commands
+bash
+# Run all tests
+php artisan test
+
+# Run specific test file
+php artisan test tests/Feature/UserTest.php
+
+# Run specific test method
+php artisan test --filter test_user_creation
+
+# Run tests with coverage
+php artisan test --coverage
+
+# Run tests in parallel
+php artisan test --parallel
+14. Debug Commands
+bash
+# Clear all caches
+php artisan optimize:clear
+
+# Show current environment
+php artisan env
+
+# List all commands
+php artisan list
+
+# Help for specific command
+php artisan help make:model
+
+
+View & Blade Commands
+15. Generate Views & Components
+bash
+# Create a Blade component
+php artisan make:component Alert
+
+# Create inline component
+php artisan make:component Alert --inline
+
+# Create view component
+php artisan make:component Alert --view
+
+# Create a view
+# (Manual creation recommended: create resources/views/welcome.blade.php)
+
+
+Job & Queue Commands
+16. Jobs & Queues
+bash
+# Create a job
+php artisan make:job SendWelcomeEmail
+
+# Create a sync job (runs immediately)
+php artisan make:job ProcessPodcast --sync
+
+# List failed jobs
+php artisan queue:failed
+
+# Retry failed jobs
+php artisan queue:retry all
+
+# Flush failed jobs
+php artisan queue:flush
+
+# Work on queues
+php artisan queue:work
+
+# Work with specific connection
+php artisan queue:work redis
+
+# Process single job
+php artisan queue:work --once
+
+# Show queue table
+php artisan queue:table
+
+
+Event & Listener Commands
+17. Events & Listeners
+bash
+# Create an event
+php artisan make:event OrderShipped
+
+# Create a listener
+php artisan make:listener SendShipmentNotification
+
+# Create listener for specific event
+php artisan make:listener SendShipmentNotification --event=OrderShipped
+
+# Generate events and listeners
+php artisan event:generate
+
+
+Mail & Notification Commands
+18. Mailables & Notifications
+bash
+# Create a mailable
+php artisan make:mail OrderShipped
+
+# Create a notification
+php artisan make:notification InvoicePaid
+
+# Create notification with --markdown option
+php artisan make:notification InvoicePaid --markdown=mail.invoice.paid
+
+
+Cache & Optimization Commands
+19. Cache Management
+bash
+# Clear application cache
+php artisan cache:clear
+
+# Clear route cache
+php artisan route:clear
+
+# Clear config cache
+php artisan config:clear
+
+# Clear view cache
+php artisan view:clear
+
+# Clear compiled class files
+php artisan clear-compiled
+
+# Cache everything for production
+php artisan optimize
+
+# Cache routes
+php artisan route:cache
+
+# Cache config
+php artisan config:cache
+
+# Cache events
+php artisan event:cache
+
+# Clear event cache
+php artisan event:clear
+
+
+Security Commands
+20. Security & Keys
+bash
+# Generate application key
+php artisan key:generate
+
+# Generate encryption keys
+php artisan passport:keys
+
+# Install Passport
+php artisan passport:install
+
+# Create encryption keys
+php artisan passport:keys
+
+
+Storage & Maintenance Commands
+21. Storage & Maintenance
+bash
+# Create symbolic link for storage
+php artisan storage:link
+
+# Put application in maintenance mode
+php artisan down
+
+# Bring application back up
+php artisan up
+
+# Maintenance mode with secret
+php artisan down --secret="1630542a-246b-4b66-afa1-dd72a4c43515"
+
+# Maintenance mode with retry
+php artisan down --retry=60
+
+
+Monitoring & Scheduling
+22. Schedule Monitoring
+bash
+# List scheduled commands
+php artisan schedule:list
+
+# Run scheduled commands
+php artisan schedule:run
+
+# Test schedule
+php artisan schedule:test
+
+
+Cleaning & Maintenance
+23. Cleanup Commands
+bash
+# Remove compiled class file
+php artisan clear-compiled
+
+# Remove all cached files
+php artisan optimize:clear
+
+# Flush expired password reset tokens
+php artisan auth:clear-resets
+
+
+Stub Customization
+24. Stub Publishing
+bash
+# Publish stubs for customization
+php artisan stub:publish
+
+
+## Custom Commands
+
+25. Create Custom Commands
+bash
+# Create a new Artisan command
+php artisan make:command SendEmails
+
+# Command with --command option
+php artisan make:command SendEmails --command=emails:send
+Example custom command structure:
+
+php
+// In app/Console/Commands/SendEmails.php
+protected $signature = 'emails:send {user} {--queue}';
+protected $description = 'Send emails to users';
+
+public function handle()
+{
+    $userId = $this->argument('user');
+    $queue = $this->option('queue');
+    
+    // Your logic here
+    
+    $this->info('Emails sent successfully!');
+}
+
+Tips & Best Practices
+
+Most Used Commands Daily:
+
+bash
+# Development workflow
+php artisan serve                    # Start server
+php artisan make:model Model -mfc   # Create model with everything
+php artisan migrate                 # Run migrations
+php artisan db:seed                 # Seed database
+php artisan tinker                  # Test code interactively
+php artisan test                    # Run tests
+
+Production Deployment:
+
+bash
+# Before deployment
+php artisan optimize:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan event:cache
+
+# After deployment
+php artisan migrate --force
+php artisan storage:link
+
+
+Troubleshooting:
+bash
+# If commands aren't working
+composer dump-autoload              # Regenerate autoload files
+php artisan clear-compiled          # Clear compiled classes
+php artisan cache:clear             # Clear cache
