@@ -96,6 +96,7 @@ class EnvDetailsCommand extends Command
         return self::SUCCESS;
     }
 
+    
     /**
      * Calculate directory size.
      */
